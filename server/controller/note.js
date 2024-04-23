@@ -7,9 +7,8 @@ const CreateAbl = require("../abl/note/createAbl"); // Importing the CreateAbl m
 const UpdateAbl = require("../abl/note/updateAbl"); // Importing the UpdateAbl module
 const DeleteAbl = require("../abl/note/deleteAbl"); // Importing the DeleteAbl module
 
-
 router.get("/", (req, res) => {
-  res.send("Hello!");   //example, that this server site works
+  res.send("Hello!"); //example, that this server site works
 });
 
 router.get("/get", (req, res) => {
