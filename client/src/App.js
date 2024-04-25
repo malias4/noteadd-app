@@ -37,7 +37,7 @@ function componentStyle() {
     display: "flex",
     flexDirection: "column",
     overflow: "hidden",
-    backgroundColor: "#333232",
+    backgroundColor: "#448f03",
   };
 }
 

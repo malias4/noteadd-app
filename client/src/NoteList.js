@@ -8,7 +8,7 @@ import NoteForm from "./NoteForm.js";
 import Container from "react-bootstrap/esm/Container.js";
 
 import Icon from "@mdi/react";
-import { mdiPlusBoxOutline } from "@mdi/js";
+import { mdiFileDocumentPlusOutline } from "@mdi/js";
 
 function NoteList() {
   const { noteList } = useContext(NoteListContext);
@@ -16,10 +16,21 @@ function NoteList() {
 
   return (
     <Container>
-      <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "20px",
+        }}
+      >
         <Button variant="success" onClick={() => setShowNoteForm({})}>
-          <Icon path={mdiPlusBoxOutline} size={1} color={"white"} /> Nová
-          poznámka
+          <Icon
+            path={mdiFileDocumentPlusOutline}
+            size={1}
+            color={"white"}
+            style={{ verticalAlign: "middle" }}
+          />{" "}
+          Nová poznámka
         </Button>
       </div>
       {!!showNoteForm ? (

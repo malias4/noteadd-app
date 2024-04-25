@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { NoteContext } from "./NoteContext.js";
 
@@ -10,11 +10,6 @@ function NoteProvider({ children }) {
     data: null,
   });
   const location = useLocation();
-  console.log(location);
-
-  const [searchParams] = useSearchParams();
-
-  console.log(searchParams.get("id"));
 
   useEffect(() => {
     handleLoad();

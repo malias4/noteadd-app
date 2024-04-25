@@ -8,7 +8,7 @@ import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 
 import Icon from "@mdi/react";
-import { mdiLoading } from "@mdi/js";
+import { mdiLoading, mdiShapeOutline, mdiRename, mdiTextBox } from "@mdi/js";
 
 function NoteForm({ setShowNoteForm, note }) {
   const { state, handlerMap } = useContext(NoteListContext);
@@ -40,7 +40,7 @@ function NoteForm({ setShowNoteForm, note }) {
         <Modal.Header>
           <Modal.Title>{`${
             note.id ? "Upravit" : "Vytvořit"
-          } událost`}</Modal.Title>
+          } poznámku`}</Modal.Title>
           <CloseButton onClick={() => setShowNoteForm(false)} />
         </Modal.Header>
         <Modal.Body style={{ position: "relative" }}>
@@ -50,7 +50,7 @@ function NoteForm({ setShowNoteForm, note }) {
             dismissible
             onClose={() => setShowAlert(null)}
           >
-            <Alert.Heading>Nepodařilo se vytvořit událost</Alert.Heading>
+            <Alert.Heading>Nepodařilo se vytvořit poznámku</Alert.Heading>
             <pre>{showAlert}</pre>
           </Alert>
 
@@ -61,31 +61,44 @@ function NoteForm({ setShowNoteForm, note }) {
           ) : null}
 
           <Form.Group className="mb-3" controlId="formCategory">
+            <Icon path={mdiShapeOutline} size={1} />
             <Form.Label>Název kategorie</Form.Label>
             <Form.Control
               type="text"
               name="category"
               required
               defaultValue={note.category}
+              maxLength={25}
             />
+            <Form.Text className="text-muted">Maximum 25 characters.</Form.Text>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formName">
-            <Form.Label>Název poznámky</Form.Label>
+            <Icon path={mdiRename} size={1} />
+            <Form.Label>Název poznámky </Form.Label>
             <Form.Control
               type="text"
               name="name"
               required
               defaultValue={note.name}
+              maxLength={25}
             />
+            <Form.Text className="text-muted">Maximum 25 characters.</Form.Text>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formContent">
+            <Icon path={mdiTextBox} size={1} />
             <Form.Label>Text poznámky</Form.Label>
             <Form.Control
+              as="textarea" // Change this line
+              rows={5} // Add this line
               type="text"
               name="content"
               required
               defaultValue={note.content}
+              maxLength={100000}
             />
+            <Form.Text className="text-muted">
+              Maximum 100 000 characters.
+            </Form.Text>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>

@@ -1,15 +1,9 @@
 import { useContext } from "react";
 import { NoteContext } from "./NoteContext";
-import Button from "react-bootstrap/esm/Button.js";
-import { useNavigate } from "react-router-dom";
 
 import NoteDetail from "./NoteDetail";
 
-import Icon from "@mdi/react";
-import { mdiEyeOutline, mdiPencil } from "@mdi/js";
-
-function NoteRoute({ setShowNoteForm }) {
-  const navigate = useNavigate();
+function NoteRoute() {
   const { note } = useContext(NoteContext);
 
   return (
@@ -24,17 +18,7 @@ function NoteRoute({ setShowNoteForm }) {
               justifyContent: "center",
               alignItems: "center",
             }}
-          >
-            <Button
-              onClick={() => navigate("/noteDetail?id=" + note.id)}
-              size={"sm"}
-            >
-              <Icon path={mdiEyeOutline} size={0.7} />
-            </Button>
-            <Button onClick={() => setShowNoteForm(note)} size={"sm"}>
-              <Icon path={mdiPencil} size={0.7} />
-            </Button>
-          </div>
+          ></div>
         </>
       ) : (
         "loading..."
@@ -47,10 +31,13 @@ function componentStyle() {
   return {
     margin: "12px auto",
     padding: "8px",
-    display: "grid",
+    columnGap: "20px",
+    maxWidth: "100%",
+    backgroundColor: "#0fa305",
+    color: "white",
+    marginBottom: "20px",
     gridTemplateColumns: "max-content auto 32px",
-    columnGap: "8px",
-    maxWidth: "640px",
+    textAlign: "center",
   };
 }
 
