@@ -9,10 +9,12 @@ import Container from "react-bootstrap/esm/Container.js";
 
 import Icon from "@mdi/react";
 import { mdiFileDocumentPlusOutline } from "@mdi/js";
+import ConfirmDeleteDialog from "./ConfirmDeleteDialog.js";
 
 function NoteList() {
   const { noteList } = useContext(NoteListContext);
   const [showNoteForm, setShowNoteForm] = useState(false);
+  const [showConfirmDeleteDialog, setShowConfirmDeleteDialog] = useState(false);
 
   return (
     <Container>
@@ -36,12 +38,20 @@ function NoteList() {
       {!!showNoteForm ? (
         <NoteForm note={showNoteForm} setShowNoteForm={setShowNoteForm} />
       ) : null}
+
+      {!!showConfirmDeleteDialog ? (
+        <ConfirmDeleteDialog
+          note={showConfirmDeleteDialog}
+          setShowConfirmDeleteDialog={setShowConfirmDeleteDialog}
+        />
+      ) : null}
       {noteList.map((note) => {
         return (
           <NoteCard
             key={note.id}
             note={note}
             setShowNoteForm={setShowNoteForm}
+            setShowConfirmDeleteDialog={setShowConfirmDeleteDialog}
           />
         );
       })}

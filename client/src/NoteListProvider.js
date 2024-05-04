@@ -57,6 +57,34 @@ function NoteListProvider({ children }) {
     }
   }
 
+  async function handleDelete(dtoIn) {
+    setNoteLoadObject((current) => ({ ...current, state: "pending" }));
+    const response = await fetch(`http://localhost:8000/note/delete`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dtoIn),
+    });
+    const responseJson = await response.json();
+
+    if (response.status < 400) {
+      setNoteLoadObject((current) => {
+        const eventIndex = current.data.findIndex(
+          (e) => e.id === responseJson.id
+        );
+        current.data.splice(eventIndex, 1);
+        return { state: "ready", data: current.data };
+      });
+      return responseJson;
+    } else {
+      setNoteLoadObject((current) => ({
+        state: "error",
+        data: current.data,
+        error: responseJson,
+      }));
+      throw new Error(JSON.stringify(responseJson, null, 2));
+    }
+  }
+
   async function handleUpdate(dtoIn) {
     setNoteLoadObject((current) => ({ ...current, state: "pending" }));
     const response = await fetch(`http://localhost:8000/note/update`, {
@@ -89,7 +117,7 @@ function NoteListProvider({ children }) {
   const value = {
     state: noteLoadObject.state,
     noteList: noteLoadObject.data || [],
-    handlerMap: { handleCreate, handleUpdate },
+    handlerMap: { handleCreate, handleUpdate, handleDelete },
   };
 
   return (

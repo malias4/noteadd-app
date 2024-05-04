@@ -2,9 +2,9 @@ import Button from "react-bootstrap/esm/Button.js";
 import { useNavigate } from "react-router-dom";
 
 import Icon from "@mdi/react";
-import { mdiRename, mdiEyeOutline } from "@mdi/js";
+import { mdiRename, mdiEyeOutline, mdiDelete } from "@mdi/js";
 
-function NoteCard({ note, setShowNoteForm }) {
+function NoteCard({ note, setShowNoteForm, setShowConfirmDeleteDialog }) {
   const navigate = useNavigate();
 
   return (
@@ -32,6 +32,13 @@ function NoteCard({ note, setShowNoteForm }) {
           size={"sm"}
         >
           <Icon path={mdiRename} size={0.7} />
+        </Button>
+        <Button
+          onClick={() => setShowConfirmDeleteDialog(note)}
+          size={"sm"}
+          variant="danger"
+        >
+          <Icon path={mdiDelete} size={0.7} />
         </Button>
       </div>
     </div>
